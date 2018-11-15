@@ -7,7 +7,9 @@ import org.apache.commons.httpclient.auth.BasicScheme;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
+import org.apache.http.HttpHost;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -66,7 +68,14 @@ public abstract class SonarHttpRequester {
     private void loginApi(GlobalConfigDataForSonarInstance globalConfigDataForSonarInstance) {
 
         httpClientContext = HttpClientContext.create();
-        httpClient = HttpClientBuilder.create().build();
+        if (!globalConfigDataForSonarInstance.getProxyUrl().isEmpty()) {
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setProxy(new HttpHost(globalConfigDataForSonarInstance.getProxyUrl(), globalConfigDataForSonarInstance.getProxyPort()))
+                    .build();
+            httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
+        } else {
+            httpClient = HttpClientBuilder.create().build();
+        }
 
         if (StringUtils.isNotEmpty(globalConfigDataForSonarInstance.getToken())) {
             token = globalConfigDataForSonarInstance.getToken();

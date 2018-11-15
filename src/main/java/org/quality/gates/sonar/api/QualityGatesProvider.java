@@ -9,8 +9,6 @@ import org.quality.gates.jenkins.plugin.GlobalConfigDataForSonarInstance;
 import org.quality.gates.jenkins.plugin.JobConfigData;
 import org.quality.gates.jenkins.plugin.QGException;
 
-import java.io.UnsupportedEncodingException;
-
 public class QualityGatesProvider {
 
     private static final int MILLISECONDS_5_MINUTES = 300000;

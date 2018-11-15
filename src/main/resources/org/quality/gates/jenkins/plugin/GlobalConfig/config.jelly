@@ -30,6 +30,12 @@
                                          <f:entry field="pass" title="SonarQube account password" description="Default value is 'admin'" >
                                                <f:password name="password" value="${globalConfigData.pass}" />
                                          </f:entry>
+                                         <f:entry field="proxyUrl" title="Proxy URL" description="Proxy URL used to connect to SonarQube." >
+                                            <f:textbox name="proxyUrl" value="${globalConfigData.proxyUrl}" />
+                                         </f:entry>
+                                         <f:entry field="proxyPort" title="Proxy Port" description="Proxy Port used to connect to SonarQube." >
+                                            <f:textbox name="proxyPort" value="${globalConfigData.proxyPort}" />
+                                         </f:entry>
                                          <f:entry field="maxWaitTime" title="Maximum waiting time (milliseconds)" description="Default value is '300000' or 5 minutes" >
                                                <f:textbox name="maxWaitTime" value="${globalConfigData.maxWaitTime}" />
                                          </f:entry>

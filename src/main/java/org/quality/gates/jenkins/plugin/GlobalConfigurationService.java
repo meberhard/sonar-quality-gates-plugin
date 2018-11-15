@@ -69,15 +69,17 @@ public class GlobalConfigurationService {
         int timeToWait = globalConfigData.optInt("timeToWait");
 		int maxWaitTime = globalConfigData.optInt("maxWaitTime");
         String url = globalConfigData.optString("url");
+        String proxyUrl = globalConfigData.optString("proxyUrl");
+        int proxyPort = globalConfigData.optInt("proxyPort");
 
         if (!"".equals(name)) {
 
             GlobalConfigDataForSonarInstance globalConfigDataForSonarInstance;
             String token = globalConfigData.optString("token");
             if (StringUtils.isNotEmpty(token)) {
-                globalConfigDataForSonarInstance = new GlobalConfigDataForSonarInstance(name, url, globalConfigData.optString("token"), timeToWait, maxWaitTime);
+                globalConfigDataForSonarInstance = new GlobalConfigDataForSonarInstance(name, url, globalConfigData.optString("token"), timeToWait, maxWaitTime, proxyUrl, proxyPort);
             } else {
-                globalConfigDataForSonarInstance = new GlobalConfigDataForSonarInstance(name, url, globalConfigData.optString("account"), Secret.fromString(Util.fixEmptyAndTrim(globalConfigData.optString("password"))), timeToWait, maxWaitTime);
+                globalConfigDataForSonarInstance = new GlobalConfigDataForSonarInstance(name, url, globalConfigData.optString("account"), Secret.fromString(Util.fixEmptyAndTrim(globalConfigData.optString("password"))), timeToWait, maxWaitTime, proxyUrl, proxyPort);
             }
 
             if (!containsGlobalConfigWithName(name)) {

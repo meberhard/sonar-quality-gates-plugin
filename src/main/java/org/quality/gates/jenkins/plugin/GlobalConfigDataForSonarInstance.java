@@ -23,6 +23,10 @@ public class GlobalConfigDataForSonarInstance {
 
     private String token;
 
+    private String proxyUrl;
+
+    private int proxyPort;
+
     private int timeToWait;
 	
 	private int maxWaitTime;
@@ -35,7 +39,7 @@ public class GlobalConfigDataForSonarInstance {
         this.pass = "";
     }
 
-    public GlobalConfigDataForSonarInstance(String name, String sonarUrl, String username, Secret secretPass, int timeToWait, int maxWaitTime) {
+    public GlobalConfigDataForSonarInstance(String name, String sonarUrl, String username, Secret secretPass, int timeToWait, int maxWaitTime, String proxyUrl, int proxyPort) {
 
         this.name = name;
         this.sonarUrl = sonarUrl;
@@ -43,6 +47,8 @@ public class GlobalConfigDataForSonarInstance {
         this.secretPass = secretPass;
         this.timeToWait = timeToWait;
 		this.maxWaitTime = maxWaitTime;
+		this.proxyUrl = proxyUrl;
+		this.proxyPort = proxyPort;
     }
 
     public GlobalConfigDataForSonarInstance(String name, String sonarUrl, String username, String pass) {
@@ -53,13 +59,15 @@ public class GlobalConfigDataForSonarInstance {
         this.pass = pass;
     }
 
-    public GlobalConfigDataForSonarInstance(String name, String sonarUrl, String token, int timeToWait, int maxWaitTime) {
+    public GlobalConfigDataForSonarInstance(String name, String sonarUrl, String token, int timeToWait, int maxWaitTime, String proxyUrl, int proxyPort) {
 
         this.name = name;
         this.sonarUrl = sonarUrl;
         this.token = token;
         this.timeToWait = timeToWait;
 		this.maxWaitTime = maxWaitTime;
+        this.proxyUrl = proxyUrl;
+        this.proxyPort = proxyPort;
     }
 
     public String getName() {
@@ -116,6 +124,22 @@ public class GlobalConfigDataForSonarInstance {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getProxyUrl() {
+        return proxyUrl;
+    }
+
+    public void setProxyUrl(String proxyUrl) {
+        this.proxyUrl = proxyUrl;
+    }
+
+    public int getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(int proxyPort) {
+        this.proxyPort = proxyPort;
     }
 
     @Override

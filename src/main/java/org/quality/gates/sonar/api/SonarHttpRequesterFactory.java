@@ -1,5 +1,7 @@
 package org.quality.gates.sonar.api;
 
+import org.apache.http.HttpHost;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -27,7 +29,17 @@ class SonarHttpRequesterFactory {
             HttpGet request = new HttpGet(getSonarApiServerVersion(globalConfigDataForSonarInstance));
 
             HttpClientContext context = HttpClientContext.create();
-            CloseableHttpClient client = HttpClientBuilder.create().build();
+
+            CloseableHttpClient client = null;
+            if (!globalConfigDataForSonarInstance.getProxyUrl().isEmpty()) {
+                RequestConfig requestConfig = RequestConfig.custom()
+                        .setProxy(new HttpHost(globalConfigDataForSonarInstance.getProxyUrl(), globalConfigDataForSonarInstance.getProxyPort()))
+                        .build();
+                client = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
+            } else {
+                client = HttpClientBuilder.create().build();
+            }
+
             CloseableHttpResponse response = client.execute(request, context);
             String sonarVersion = EntityUtils.toString(response.getEntity());
 

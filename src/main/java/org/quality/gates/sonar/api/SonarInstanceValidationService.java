@@ -56,7 +56,9 @@ public class SonarInstanceValidationService {
                     validateUrl(globalConfigDataForSonarInstance),
                     globalConfigDataForSonarInstance.getToken(),
                     globalConfigDataForSonarInstance.getTimeToWait(),
-					globalConfigDataForSonarInstance.getMaxWaitTime());
+					globalConfigDataForSonarInstance.getMaxWaitTime(),
+                    globalConfigDataForSonarInstance.getProxyUrl(),
+                    globalConfigDataForSonarInstance.getProxyPort());
         } else {
             return new GlobalConfigDataForSonarInstance(
                     globalConfigDataForSonarInstance.getName(),
@@ -64,7 +66,9 @@ public class SonarInstanceValidationService {
                     validateUsername(globalConfigDataForSonarInstance),
                     validatePassword(globalConfigDataForSonarInstance),
                     globalConfigDataForSonarInstance.getTimeToWait(),
-					globalConfigDataForSonarInstance.getMaxWaitTime());
+					globalConfigDataForSonarInstance.getMaxWaitTime(),
+                    globalConfigDataForSonarInstance.getProxyUrl(),
+                    globalConfigDataForSonarInstance.getProxyPort());
         }
     }
 }
